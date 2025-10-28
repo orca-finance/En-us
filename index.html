@@ -4,311 +4,84 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Gate.io™ Exchange | Official Cryptocurrency Exchange for Bitcoin, Ethereum & Altcoins</title>
-  <meta name="description" content="Trade Bitcoin, Ethereum, and 2,000+ altcoins securely on Gate.io — your trusted global cryptocurrency exchange." />
-  <meta name="theme-color" content="#00BFA6" />
-  <style>
-    :root{
-      --accent-1: #00bfa6; /* teal */
-      --accent-2: #ff6b6b; /* coral */
-      --accent-3: #00a3ff; /* sky blue */
-      --accent-4: #6a00f4; /* violet */
-      --accent-5: #ffd166; /* warm yellow */
-      --bg: linear-gradient(180deg,#f5fbff,#fffaf7);
-      --radius: 16px;
-      --container-width: 1100px;
-      --nav-dot-size:12px;
-      font-family: Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
-      scroll-behavior: smooth;
-    }
-    /* Reset */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:#072227;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
-    }
-    a{color:inherit;text-decoration:none}
-    main{height:100vh;overflow:auto;scroll-snap-type:y mandatory}
-    section{
-      min-height:100vh;
-      height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:48px 24px;
-      scroll-snap-align:start;
-      position:relative;
-    }
-    .wrap{
-      width:100%;
-      max-width:var(--container-width);
-      margin:0 auto;
-      display:grid;
-      grid-template-columns:1fr 420px;
-      gap:48px;
-      align-items:center;
-    }
-    .content{
-      padding:28px;
-      border-radius:var(--radius);
-      box-shadow:0 10px 30px rgba(10,10,10,0.08);
-      backdrop-filter: blur(6px);
-      background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.92));
-    }
-    h1{margin:0 0 10px;font-size:clamp(26px,3.6vw,40px);line-height:1.05}
-    p.lead{margin:0 0 18px;font-size:1.05rem;color:rgba(7,34,39,0.92)}
-    ul.benefits{padding-left:18px;margin:16px 0 0}
-    ol.benefits{padding-left:18px;margin:16px 0 0}
-    li{margin:10px 0}
-    .tag{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:600;font-size:0.85rem;margin-bottom:12px}
-    .cta{
-      display:inline-block;padding:12px 18px;border-radius:12px;font-weight:700;margin-top:14px;
-      box-shadow:0 8px 20px rgba(0,0,0,0.08);
-      cursor:pointer; transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
-      background:linear-gradient(90deg,var(--accent-1), #00a393); color:#fff;
-    }
-    .cta:hover{transform:translateY(-4px); box-shadow:0 14px 30px rgba(0,0,0,0.12)}
-    .cta.secondary{background:linear-gradient(90deg,var(--accent-3), #0077c9);}
-    .preview{
-      padding:24px;border-radius:14px;display:flex;flex-direction:column;gap:12px;align-items:flex-start;color:#fff;
-      box-shadow:0 12px 30px rgba(0,0,0,0.12);
-    }
-    .preview h3{margin:0;font-size:1.05rem}
-    .preview p{margin:0.2rem 0 0}
-    /* Section themes */
-    #sec-1{background:linear-gradient(135deg,#e6fffa 0%, #d6f7ee 45%, #fff7f6 100%)}
-    #sec-1 .preview{background:linear-gradient(180deg,var(--accent-1), #00a393)}
-    #sec-2{background:linear-gradient(135deg,#fff4f2 0%, #ffe9e6 45%, #fffaf7 100%)}
-    #sec-2 .preview{background:linear-gradient(180deg,#ff8a65,#ff6b6b)}
-    #sec-3{background:linear-gradient(135deg,#eef7ff 0%, #e6f4ff 55%, #fffcff 100%)}
-    #sec-3 .preview{background:linear-gradient(180deg,#0077c9,#00a3ff)}
-    #sec-4{background:linear-gradient(135deg,#f9f6ff 0%, #f0f0ff 55%, #fffaf7 100%)}
-    #sec-4 .preview{background:linear-gradient(180deg,#6a00f4,#7c4dff)}
-    #sec-5{background:linear-gradient(135deg,#fffdf6 0%, #fff7e6 55%, #fffaf2 100%)}
-    #sec-5 .preview{background:linear-gradient(180deg,#ffd166,#ffb36b)}
-    /* Navigation dots */
-    nav.dots{
-      position:fixed; right:18px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:14px; z-index:1200;
-    }
-    nav.dots a{
-      width:var(--nav-dot-size); height:var(--nav-dot-size); border-radius:50%; display:block; background:rgba(255,255,255,0.6);
-      box-shadow:0 3px 8px rgba(10,10,10,0.12); border:3px solid rgba(255,255,255,0.2); transition:transform .18s ease;
-    }
-    nav.dots a.active{transform:scale(1.2); box-shadow:0 8px 20px rgba(0,0,0,0.18)}
-    /* Floating coin icons */
-    .floating-ico{position:fixed;z-index:900;opacity:0.12;pointer-events:none}
-    .btc{right:6%;top:12%;width:80px}
-    .eth{left:6%;bottom:12%;width:72px}
-    /* Responsive */
-    @media (max-width:980px){
-      .wrap{grid-template-columns:1fr;gap:20px}
-      .preview{order:-1}
-      nav.dots{right:10px}
-      .btc,.eth{display:none}
-    }
-    @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-  </style>
+  <meta name="description" content="Gate.io™ — Trade Bitcoin, Ethereum and 2,000+ altcoins on a secure, compliant, and feature-rich global exchange. Fast execution, advanced tools, and products to grow your crypto portfolio." />
 </head>
 <body>
-  <!-- Decorative floating icons -->
-  <svg class="floating-ico btc" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <circle cx="32" cy="32" r="30" fill="#f2a900"/>
-    <text x="32" y="38" text-anchor="middle" font-size="28" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-weight="700">฿</text>
-  </svg>
-  <svg class="floating-ico eth" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <circle cx="32" cy="32" r="30" fill="#3c3c3d"/>
-    <path d="M32 12 L24 32 L32 28 L40 32 Z M32 52 L24 32 L32 36 L40 32 Z" fill="#fff"/>
-  </svg>
+  <article>
+    <h1>Gate.io™ Exchange — Trade Bitcoin, Ethereum & Altcoins with Confidence</h1>
 
-  <!-- Right-side dot navigation -->
-  <nav class="dots" aria-label="Section navigation">
-    <a href="#sec-1" class="dot active" data-target="sec-1" aria-label="Overview" style="background:linear-gradient(180deg,var(--accent-1),#00a393)"></a>
-    <a href="#sec-2" class="dot" data-target="sec-2" aria-label="Trading features" style="background:linear-gradient(180deg,#ff8a65,#ff6b6b)"></a>
-    <a href="#sec-3" class="dot" data-target="sec-3" aria-label="Security" style="background:linear-gradient(180deg,#0077c9,#00a3ff)"></a>
-    <a href="#sec-4" class="dot" data-target="sec-4" aria-label="Earn products" style="background:linear-gradient(180deg,#6a00f4,#7c4dff)"></a>
-    <a href="#sec-5" class="dot" data-target="sec-5" aria-label="Support" style="background:linear-gradient(180deg,#ffd166,#ffb36b)"></a>
-  </nav>
+    <p>
+      Gate.io™ is a global cryptocurrency exchange built for traders and investors who demand performance, security, and choice.
+      Whether you are buying Bitcoin (BTC) for the first time, executing high-frequency strategies on Ethereum (ETH) pairs, or
+      exploring promising altcoins, Gate.io delivers deep liquidity, fast order execution, and a comprehensive product set designed
+      to fit every skill level. Our platform unifies spot markets, derivatives, staking, savings and launchpad services under a
+      single, accessible interface so you can manage capital, execute strategies, and pursue yield with clarity and control.
+    </p>
 
-  <main id="page" role="main" aria-label="Gate.io Exchange Landing">
-    <!-- SECTION 1: Overview / Hero -->
-    <section id="sec-1" aria-labelledby="s1-h1">
-      <div class="wrap">
-        <div class="content" aria-hidden="false">
-          <span class="tag" style="background:linear-gradient(90deg,var(--accent-1),#00a393); color:#fff">Gate.io™ Exchange</span>
-          <h1 id="s1-h1">Gate.io™ Exchange — Trade Bitcoin, Ethereum & Altcoins with Confidence</h1>
-          <p class="lead">Gate.io™ is a top-tier global cryptocurrency exchange delivering secure trading, deep liquidity, and an all-in-one crypto ecosystem for investors and traders of all levels.</p>
-          <ul class="benefits" aria-hidden="false">
-            <li><strong>Buy and sell Bitcoin (BTC), Ethereum (ETH), and 2,000+ altcoins easily.</strong></li>
-            <li><strong>Trusted by millions of traders worldwide.</strong></li>
-            <li><strong>Fast, secure, and compliant crypto transactions.</strong></li>
-          </ul>
-          <div>
-            <a class="cta" href="/trade" title="Explore Exchange">Explore Exchange</a>
-            <a class="cta secondary" href="/buy" title="Buy Crypto" style="margin-left:12px">Buy Crypto</a>
-          </div>
-        </div>
+    <h2>Fast, Reliable Markets & Tools</h2>
 
-        <aside class="preview" aria-hidden="true">
-          <h3>Snapshot</h3>
-          <p>All-in-one trading: spot, derivatives, savings, and institutional-grade API access.</p>
-          <p style="opacity:.95"><strong>Global reach:</strong> 200+ countries · 24/7 markets</p>
-        </aside>
-      </div>
-    </section>
+    <p>
+      Trade across multiple market types with confidence. Gate.io offers robust spot trading with thousands of trading pairs and
+      margin options for users seeking advanced exposure. For professional traders we provide futures and perpetual contracts with
+      competitive leverage, programmable APIs for algorithmic strategies, and real-time charting tools that integrate cleanly with
+      third-party analytics. The trading engine is engineered for high throughput and low latency; during volatile sessions our
+      infrastructure keeps markets responsive so orders fill accurately and positions are managed reliably.
+    </p>
 
-    <!-- SECTION 2: Trading Features -->
-    <section id="sec-2" aria-labelledby="s2-h1">
-      <div class="wrap">
-        <div class="content">
-          <span class="tag" style="background:linear-gradient(90deg,#ff8a65,#ff6b6b); color:#fff">Trading</span>
-          <h1 id="s2-h1">Advanced Trading Solutions for Every User</h1>
-          <p class="lead">From beginner spot trading to advanced derivatives and copy trading, Gate.io provides professional-grade markets and tools to match your strategy.</p>
-          <ol class="benefits">
-            <li>Spot and margin trading with deep liquidity</li>
-            <li>Futures trading with up to <strong>100× leverage</strong></li>
-            <li>Copy trading and quantitative strategies for all levels</li>
-            <li>Cross-platform trading: web, mobile app, and programmable API</li>
-          </ol>
-          <div>
-            <a class="cta" href="/trade" title="Start Trading Now">Start Trading Now</a>
-          </div>
-        </div>
+    <h2>Security & Transparency First</h2>
 
-        <aside class="preview" aria-hidden="true">
-          <h3>Pro Tools</h3>
-          <p>Real-time charts, multiple order types, and API access for algorithmic trading.</p>
-        </aside>
-      </div>
-    </section>
+    <p>
+      Security is the foundation of trust at Gate.io. We use multi-layered protections including cold-wallet custody for the majority
+      of assets, hardware key management, two-factor authentication, IP and withdrawal whitelists, and continuous monitoring powered
+      by machine learning to detect irregular activity. We also publish independent proof-of-reserves attestations and maintain
+      clear compliance processes to ensure users can verify that funds are held securely and transparently. Our security philosophy
+      is simple: protect assets, reduce risk, and be open about controls so users can trade with peace of mind.
+    </p>
 
-    <!-- SECTION 3: Security & Transparency -->
-    <section id="sec-3" aria-labelledby="s3-h1">
-      <div class="wrap">
-        <div class="content">
-          <span class="tag" style="background:linear-gradient(90deg,#0077c9,#00a3ff); color:#fff">Security</span>
-          <h1 id="s3-h1">Unmatched Security. Verified Transparency.</h1>
-          <p class="lead">Protecting user funds and personal data is our top priority. Gate.io blends industry-standard protections with independent verification to keep your assets safe.</p>
-          <ul class="benefits">
-            <li>Cold wallet fund storage and two-factor authentication (2FA)</li>
-            <li>Real-time risk monitoring and AI-driven fraud detection</li>
-            <li>Proof-of-Reserves (PoR) verification for asset transparency</li>
-          </ul>
-          <div>
-            <a class="cta" href="/security" title="Learn About Security">Learn About Security</a>
-          </div>
-        </div>
+    <h2>Earn, Stake & Grow Your Portfolio</h2>
 
-        <aside class="preview" aria-hidden="true">
-          <h3>Trust & Safety</h3>
-          <p>Periodic audits, secure key management, and customer-first policies.</p>
-        </aside>
-      </div>
-    </section>
+    <p>
+      Gate Earn unlocks opportunities to earn yield on crypto holdings without losing custody. Choose from flexible savings, fixed-term
+      products, staking opportunities and liquidity-mining programs that suit conservative and yield-seeking users alike. For
+      users interested in structured exposure, our dual investment and quant products let you pursue returns in sideways or volatile
+      markets while maintaining clear payoff profiles. Combined with token launches and a startup platform, Gate.io helps users
+      discover new projects and participate early in vetted opportunities.
+    </p>
 
-    <!-- SECTION 4: Earn & Financial Products -->
-    <section id="sec-4" aria-labelledby="s4-h1">
-      <div class="wrap">
-        <div class="content">
-          <span class="tag" style="background:linear-gradient(90deg,#6a00f4,#7c4dff); color:#fff">Earn</span>
-          <h1 id="s4-h1">Grow Your Portfolio with Gate Earn</h1>
-          <p class="lead">Explore flexible savings, staking, liquidity mining and structured products designed to help you earn yield on your crypto holdings.</p>
-          <ul class="benefits">
-            <li>Flexible and fixed savings products</li>
-            <li>Dual investment and structured yield options</li>
-            <li>Participate in startup token launches and DeFi initiatives</li>
-          </ul>
-          <div>
-            <a class="cta" href="/earn" title="Discover Gate Earn">Discover Gate Earn</a>
-          </div>
-        </div>
+    <h2>Accessible, Global Support & Education</h2>
 
-        <aside class="preview" aria-hidden="true">
-          <h3>Passive Income</h3>
-          <p>Multiple yield options tailored to different risk profiles.</p>
-        </aside>
-      </div>
-    </section>
+    <p>
+      We support millions of users across 200+ countries with localized resources, multilingual customer support, and a growing library
+      of educational content. Gate Learn provides step-by-step tutorials, market primers, and strategy guides that help beginners
+      onboard safely and help experienced traders refine techniques. Our Help Center, community channels, and responsive support team
+      ensure you get practical assistance for deposits, withdrawals, security settings, and product guidance whenever you need it.
+    </p>
 
-    <!-- SECTION 5: Support & Global Community -->
-    <section id="sec-5" aria-labelledby="s5-h1">
-      <div class="wrap">
-        <div class="content">
-          <span class="tag" style="background:linear-gradient(90deg,#ffd166,#ffb36b); color:#5b2a2a">Community</span>
-          <h1 id="s5-h1">Join Millions of Users Worldwide</h1>
-          <p class="lead">Gate.io supports a global user base with localized resources, 24/7 multilingual support, and educational content to help you trade smarter.</p>
-          <ul class="benefits">
-            <li>24/7 multilingual customer service</li>
-            <li>Gate Learn tutorials and market insights</li>
-            <li>Active global community in 200+ countries</li>
-          </ul>
-          <div>
-            <a class="cta" href="/help" title="Visit Help Center">Visit Help Center</a>
-          </div>
-        </div>
+    <h2>Compliance & Responsible Operations</h2>
 
-        <aside class="preview" aria-hidden="true">
-          <h3>Support</h3>
-          <p>Comprehensive documentation, FAQs, and responsive customer care.</p>
-        </aside>
-      </div>
-    </section>
-  </main>
+    <p>
+      Gate.io is committed to operating responsibly in the evolving regulatory landscape. We maintain rigorous KYC and AML standards,
+      actively cooperate with regulators where required, and design products with consumer protection in mind. Our approach balances
+      innovation with governance so users can access cutting-edge crypto finance while benefiting from clear rules, strong controls,
+      and predictable operational behavior.
+    </p>
 
-  <script>
-    (function(){
-      const dots = document.querySelectorAll('nav.dots a');
-      const sections = Array.from(document.querySelectorAll('main section'));
-      const main = document.getElementById('page');
+    <h2>Why Choose Gate.io?</h2>
 
-      // IntersectionObserver for active dot
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            const id = e.target.id;
-            dots.forEach(d => d.classList.toggle('active', d.dataset.target === id));
-            history.replaceState(null, '', '#'+id);
-          }
-        });
-      }, { root: main, threshold: 0.55 });
+    <p>
+      Choosing an exchange is about more than fees — it’s about liquidity, reliability, product breadth, and the confidence that your assets
+      are protected. Gate.io combines market depth and advanced trading tools with transparent custody practices and a diverse financial
+      product suite. From straightforward purchases of Bitcoin and Ethereum to institutional API integrations and yield strategies,
+      Gate.io provides the infrastructure and support to manage crypto holdings responsibly and pursue long-term growth.
+    </p>
 
-      sections.forEach(s => obs.observe(s));
+    <h2>Get Started</h2>
 
-      // Smooth scrolling for dots
-      dots.forEach(d => {
-        d.addEventListener('click', (ev) => {
-          ev.preventDefault();
-          const target = document.getElementById(d.dataset.target);
-          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-      });
-
-      // Keyboard navigation (ArrowUp / ArrowDown)
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-          e.preventDefault();
-          const index = sections.findIndex(s => {
-            const rect = s.getBoundingClientRect();
-            return rect.top >= -20 && rect.top < window.innerHeight / 2;
-          });
-          let next = index;
-          if (e.key === 'ArrowDown') next = Math.min(sections.length - 1, index + 1);
-          if (e.key === 'ArrowUp') next = Math.max(0, index - 1);
-          sections[next].scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-
-      // Make sure the correct dot is active on load (if hash present)
-      function activateFromHash() {
-        const hash = location.hash.replace('#','');
-        if (!hash) return;
-        dots.forEach(d => d.classList.toggle('active', d.dataset.target === hash));
-      }
-      activateFromHash();
-    })();
-  </script>
+    <p>
+      Create an account to begin trading, explore Gate Earn to earn on idle assets, or visit our security center to strengthen your account.
+      Whether you are taking your first steps into crypto or scaling an institutional strategy, Gate.io™ is designed to help you trade smarter,
+      safer, and with the tools you need to succeed.
+    </p>
+  </article>
 </body>
 </html>
